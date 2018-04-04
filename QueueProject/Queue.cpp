@@ -3,59 +3,48 @@
 
 
 
-	template <class T>
-	bool Queue<T>::isEmpty()
+	bool Queue::isEmpty()
 	{
-		return count == 0;
+		return firstIndex > lastIndex;
 	}
 
-	template <class T>
-	void Queue<T>::add(T item)
+	void Queue::add(int item)
 	{
+		if (isFull())
+			return;
 		items[++lastIndex] = item;
-		++count;
 	}
 
-	template <class T>
-	T Queue<T>::get()
+	int Queue::get()
 	{
-		checkForEmpty();
+		if (isEmpty())
+			return NULL;
 		return items[firstIndex];
 	}
 
-	template <class T>
-	void Queue<T>::remove()
-	{
-		checkForEmpty();
-		items[firstIndex++] = 0;
-		--count;
-	}
-
-	template <class T>
-	int Queue<T>::getCount()
-	{
-		return count;
-	}
-
-	template <class T>
-	void Queue<T>::checkForEmpty()
+	int Queue::remove()
 	{
 		if (isEmpty())
-		{
-			throw nullptr;
-		}
+			return NULL;
+		int temp = items[firstIndex];
+		return temp ;
+		
+	}
+	
+	bool Queue::isFull()
+	{
+		return SIZE == lastIndex + 1;
 	}
 
-	template <class T>
-	Queue<T>::Queue()
+
+	Queue::Queue()
 	{
 		lastIndex = -1;
 		firstIndex = 0;
-		count = 0;
+		
 	}
 
-	template <class T>
-	Queue<T>::~Queue()
+	Queue::~Queue()
 	{
 	}
 
